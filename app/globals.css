@@ -30,23 +30,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  @apply text-9xl leading-none tracking-[0px];
+  @apply text-4xl sm:text-6xl lg:text-8xl xl:text-9xl leading-none tracking-[0px];
 }
 
 h2 {
-  @apply font-medium leading-none tracking-[0px];
+  @apply text-3xl sm:text-4xl lg:text-6xl font-medium leading-none tracking-[0px];
 }
 
 .hero-subtitle {
-  @apply text-2xl leading-none tracking-[0px];
+  @apply text-lg sm:text-xl lg:text-2xl leading-snug tracking-[0px];
 }
 
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(108.88deg, #B53EA4 -2.82%, #FC6F32 34.48%, #FF4A59 93.08%);
+.gradient-text-1 {
+  background: linear-gradient(
+    108.88deg,
+    #B53EA4 -2.82%,
+    #FC6F32 34.48%,
+    #FF4A59 93.08%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.gradient-text-2 {
+  background:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    linear-gradient(106.2deg, #FFD6F9 -12.33%, #FFCBB4 50.28%, #FFBEC3 114.17%);
+  -webkit-background-clip: text, text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text, text;
 }
 
 .gradient-background {
@@ -54,11 +67,11 @@ h2 {
 }
 
 .btn-ghost {
-  @apply pt-3.5 pb-4 px-6 font-medium text-lg text-white;
+  @apply px-5 sm:px-6 py-3.5 font-medium text-base sm:text-lg text-white;
 }
 
 .btn-outline {
-  @apply pt-3.5 pb-4 px-8 font-medium text-lg text-white relative;
+  @apply px-6 sm:px-8 py-3.5 font-medium text-base sm:text-lg text-white relative;
   background: transparent;
   position: relative;
   border-radius: 91px;
@@ -83,6 +96,6 @@ h2 {
 }
 
 .stat-card {
-  @apply p-8 rounded-[91px];
+  @apply p-5 sm:p-6 lg:p-8 rounded-3xl md:rounded-[91px];
   background: linear-gradient(105.65deg, rgba(150, 52, 136, 0.2) 0.15%, rgba(252, 111, 50, 0.2) 130.58%, rgba(255, 74, 89, 0.2) 263.64%);
 }
