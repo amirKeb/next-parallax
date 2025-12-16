@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import Image from "next/image";
 
 const logos = [
@@ -16,6 +16,8 @@ const logos = [
 ];
 
 const LogosSlider = () => {
+  const controls = useAnimationControls();
+
   return (
     <div className="w-full px-4 sm:px-8 md:px-20 py-10 flex flex-col items-center justify-center gap-10">
       <h2 className="text-center">
@@ -24,26 +26,27 @@ const LogosSlider = () => {
       <motion.div
         className="w-full flex flex-wrap items-center justify-evenly gap-x-12 gap-y-8"
         initial="hidden"
-        whileInView="show"
+        animate={controls}
+        onViewportEnter={() => controls.start("show")}
+        onViewportLeave={() => controls.start("hidden")}
         viewport={{ amount: 0.25, once: false }}
         variants={{
           hidden: { opacity: 0 },
           show: {
             opacity: 1,
             transition: {
-              staggerChildren: 0.08,
               delayChildren: 0.25,
             },
           },
         }}
       >
-        {logos.map((logo, index) => (
+        {logos.map((logo) => (
           <motion.div
-            key={index}
+            key={logo.src}
             className="shrink-0"
             variants={{
-              hidden: { opacity: 0, x: 24 },
-              show: { opacity: 1, x: 0 },
+              hidden: { opacity: 0, x: 400 },
+              show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
             }}
           >
             <Image

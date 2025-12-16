@@ -30,15 +30,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  @apply text-4xl sm:text-6xl lg:text-8xl xl:text-9xl leading-none tracking-[0px];
+  @apply text-4xl sm:text-6xl lg:text-[125px] leading-none tracking-[0px];
 }
 
 h2 {
-  @apply text-3xl sm:text-4xl lg:text-6xl font-medium leading-none tracking-[0px];
+  @apply text-3xl sm:text-4xl lg:text-[64px] font-medium leading-none tracking-[0px];
 }
 
 .hero-subtitle {
-  @apply text-lg sm:text-xl lg:text-2xl leading-snug tracking-[0px];
+  @apply text-lg sm:text-xl lg:text-2xl leading-none tracking-[0px];
 }
 
 .gradient-text-1 {
@@ -62,10 +62,6 @@ h2 {
   background-clip: text, text;
 }
 
-.gradient-background {
-  background: linear-gradient(180deg, #000000 36.4%, #191E2A 100%);
-}
-
 .btn-ghost {
   @apply px-5 sm:px-6 py-3.5 font-medium text-base sm:text-lg text-white;
 }
@@ -73,7 +69,6 @@ h2 {
 .btn-outline {
   @apply px-6 sm:px-8 py-3.5 font-medium text-base sm:text-lg text-white relative;
   background: transparent;
-  position: relative;
   border-radius: 91px;
 }
 
