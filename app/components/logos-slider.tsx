@@ -19,12 +19,12 @@ const LogosSlider = () => {
   const controls = useAnimationControls();
 
   return (
-    <div className="w-full px-4 sm:px-8 md:px-20 py-10 flex flex-col items-center justify-center gap-10">
+    <div className="w-full max-w-[100vw] px-4 sm:px-8 md:px-20 py-10 flex flex-col items-center justify-center gap-10 overflow-hidden">
       <h2 className="text-center">
         Projects integrated into the Arrakis AI Ecosystem
       </h2>
       <motion.div
-        className="w-full flex flex-wrap items-center justify-evenly gap-x-12 gap-y-8"
+        className="w-full max-w-[100vw] flex flex-wrap items-center justify-evenly gap-x-12 gap-y-8"
         initial="hidden"
         animate={controls}
         onViewportEnter={() => controls.start("show")}
