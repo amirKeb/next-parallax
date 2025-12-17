@@ -5,6 +5,7 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { useRef, useState } from "react";
@@ -15,6 +16,8 @@ import LogosSlider from "./components/logos-slider";
 export default function Home() {
   const HOW_IT_WORKS_SCROLL_TOP = 1080;
   const STATS_EXIT_SCROLL_TOP = 1760;
+  const HERO_TO_LOGOS_START = HOW_IT_WORKS_SCROLL_TOP;
+  const HERO_TO_LOGOS_END = HOW_IT_WORKS_SCROLL_TOP + 800;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ container: containerRef });
@@ -52,20 +55,42 @@ export default function Home() {
     [1, 0]
   );
 
-  const heroStageExitY = useTransform(
+  const heroStageExitYRaw = useTransform(
     scrollY,
-    [HOW_IT_WORKS_SCROLL_TOP, 1260],
-    [0, -1260]
+    [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
+    [0, -1440]
   );
-  const logosEnterY = useTransform(
+  const heroStageExitY = useSpring(heroStageExitYRaw, {
+    stiffness: 140,
+    damping: 30,
+    mass: 0.6,
+  });
+
+  const logosEnterYRaw = useTransform(
     scrollY,
-    [HOW_IT_WORKS_SCROLL_TOP, 1260],
-    [1260, 0]
+    [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
+    [640, 0]
+  );
+  const logosEnterY = useSpring(logosEnterYRaw, {
+    stiffness: 140,
+    damping: 30,
+    mass: 0.6,
+  });
+
+  const heroStageOpacity = useTransform(
+    scrollY,
+    [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
+    [1, 0]
+  );
+  const logosOpacity = useTransform(
+    scrollY,
+    [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
+    [0, 1]
   );
 
   const navbarOpacity = useTransform(
     scrollY,
-    [HOW_IT_WORKS_SCROLL_TOP, 1260],
+    [HOW_IT_WORKS_SCROLL_TOP, 1200],
     [1, 0]
   );
 
@@ -140,12 +165,12 @@ export default function Home() {
       </motion.nav>
 
       <main>
-        <section className="relative h-[280vh]">
+        <section className="relative h-[300vh]">
           <div className="sticky top-0">
             <div className="relative z-10 flex min-h-[calc(100vh-80px)] items-center">
               <motion.div
                 className="relative z-10 w-full px-8 md:px-20"
-                style={{ y: heroStageExitY }}
+                style={{ y: heroStageExitY, opacity: heroStageOpacity }}
               >
                 <motion.div className="relative" style={{ y: heroLiftY }}>
                   <div className="flex-1 max-w-[85vw] lg:gap-9 gap-6 flex flex-col">
@@ -181,7 +206,7 @@ export default function Home() {
                   </div>
 
                   <motion.div
-                    className="absolute left-0 right-0 top-full lg:mt-[152px] mt-[64px]"
+                    className="absolute left-0 right-0 top-full 2xl:mt-[152px] mt-[64px]"
                     style={{ y: statsRevealY }}
                   >
                     <StatsContainer shouldExit={statsShouldExit} />
@@ -191,7 +216,7 @@ export default function Home() {
 
               <motion.div
                 className="absolute inset-0 z-0 flex items-center justify-center"
-                style={{ y: logosEnterY }}
+                style={{ y: logosEnterY, opacity: logosOpacity }}
               >
                 <LogosSlider />
               </motion.div>

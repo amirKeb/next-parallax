@@ -35,7 +35,8 @@ const LogosSlider = () => {
           show: {
             opacity: 1,
             transition: {
-              delayChildren: 0.25,
+              delayChildren: 0.5,
+              staggerChildren: 0.1,
             },
           },
         }}
@@ -54,8 +55,8 @@ const LogosSlider = () => {
               alt={logo.alt}
               width={logo.isSquare ? 120 : 220}
               height={logo.isSquare ? 120 : 80}
-              sizes="(max-width: 640px) 120px, 220px"
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+              sizes="(max-width: 640px) 80px, 120px"
+              className="max-h-10 sm:max-h-12 md:max-h-14 w-auto object-contain"
             />
           </motion.div>
         ))}
