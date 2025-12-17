@@ -83,8 +83,8 @@ function StatCard({ number, label }: { number: string; label: string }) {
         },
       }}
     >
-      <p className="text-4xl sm:text-5xl lg:text-[64px] font-bold">{number}</p>
-      <p className="text-base sm:text-lg lg:text-xl font-normal">{label}</p>
+      <p className="text-2xl sm:text-5xl lg:text-[64px] font-bold">{number}</p>
+      <p className="text-sm sm:text-lg lg:text-xl font-normal">{label}</p>
     </motion.div>
   );
 }

@@ -91,6 +91,6 @@ h2 {
 }
 
 .stat-card {
-  @apply p-5 md:p-6 2xl:p-8 rounded-3xl rounded-[91px];
+  @apply p-3 md:p-6 2xl:p-8 rounded-3xl rounded-[91px];
   background: linear-gradient(105.65deg, rgba(150, 52, 136, 0.2) 0.15%, rgba(252, 111, 50, 0.2) 130.58%, rgba(255, 74, 89, 0.2) 263.64%);
 }

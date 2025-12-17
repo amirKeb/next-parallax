@@ -8,16 +8,25 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import StatsContainer from "./components/stats-container";
 import LogosSlider from "./components/logos-slider";
 
 export default function Home() {
-  const HOW_IT_WORKS_SCROLL_TOP = 1080;
-  const STATS_EXIT_SCROLL_TOP = 1760;
+  // Viewport-height derived scroll "milestones" so timings stay consistent on mobile.
+  const [vh, setVh] = useState(800);
+  useEffect(() => {
+    const update = () => setVh(window.innerHeight || 800);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const HOW_IT_WORKS_SCROLL_TOP = useMemo(() => Math.round(vh * 1.2), [vh]);
+  const STATS_EXIT_SCROLL_TOP = useMemo(() => Math.round(vh * 2.0), [vh]);
   const HERO_TO_LOGOS_START = HOW_IT_WORKS_SCROLL_TOP;
-  const HERO_TO_LOGOS_END = HOW_IT_WORKS_SCROLL_TOP + 800;
+  const HERO_TO_LOGOS_END = HOW_IT_WORKS_SCROLL_TOP + Math.round(vh * 0.9);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ container: containerRef });
@@ -41,7 +50,7 @@ export default function Home() {
   );
   const planetLiftExtraY = useTransform(
     scrollY,
-    [0, 580, HOW_IT_WORKS_SCROLL_TOP, STATS_EXIT_SCROLL_TOP],
+    [0, vh * 0.65, HOW_IT_WORKS_SCROLL_TOP, STATS_EXIT_SCROLL_TOP],
     [0, 0, -72, -160]
   );
   const heroGradientTwoOpacity = useTransform(
@@ -58,7 +67,7 @@ export default function Home() {
   const heroStageExitYRaw = useTransform(
     scrollY,
     [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
-    [0, -1440]
+    [0, -vh * 1.4]
   );
   const heroStageExitY = useSpring(heroStageExitYRaw, {
     stiffness: 140,
@@ -69,7 +78,7 @@ export default function Home() {
   const logosEnterYRaw = useTransform(
     scrollY,
     [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
-    [640, 0]
+    [vh * 0.55, 0]
   );
   const logosEnterY = useSpring(logosEnterYRaw, {
     stiffness: 140,
@@ -86,12 +95,6 @@ export default function Home() {
     scrollY,
     [HERO_TO_LOGOS_START, HERO_TO_LOGOS_END],
     [0, 1]
-  );
-
-  const navbarOpacity = useTransform(
-    scrollY,
-    [HOW_IT_WORKS_SCROLL_TOP, 1200],
-    [1, 0]
   );
 
   useMotionValueEvent(scrollY, "change", (v) => {
@@ -150,10 +153,7 @@ export default function Home() {
         </motion.div>
       </motion.div>
 
-      <motion.nav
-        className="sticky top-0 z-10 flex items-center justify-center gap-6 px-8 py-6 md:px-16"
-        style={{ opacity: navbarOpacity }}
-      >
+      <motion.nav className=" top-0 z-10 flex items-center justify-center gap-6 px-8 py-6 md:px-16">
         <button
           type="button"
           className="btn-ghost"
@@ -173,7 +173,7 @@ export default function Home() {
                 style={{ y: heroStageExitY, opacity: heroStageOpacity }}
               >
                 <motion.div className="relative" style={{ y: heroLiftY }}>
-                  <div className="flex-1 max-w-[85vw] lg:gap-9 gap-6 flex flex-col">
+                  <div className="flex-1 max-w-[85vw] lg:gap-9 gap-4 flex flex-col">
                     <div className="relative">
                       {/* Semantic h1 keeps layout; visible layers are aria-hidden */}
                       <h1 className="invisible">
