@@ -25,7 +25,12 @@ body {
   font-family: var(--font-inter), sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-clash-grotesk), sans-serif;
 }
 
@@ -42,12 +47,10 @@ h2 {
 }
 
 .gradient-text-1 {
-  background: linear-gradient(
-    108.88deg,
-    #B53EA4 -2.82%,
-    #FC6F32 34.48%,
-    #FF4A59 93.08%
-  );
+  background: linear-gradient(108.88deg,
+      #B53EA4 -2.82%,
+      #FC6F32 34.48%,
+      #FF4A59 93.08%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,12 +67,23 @@ h2 {
 
 .btn-ghost {
   @apply px-5 sm:px-6 py-3.5 font-medium text-base sm:text-lg text-white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: linear-gradient(106.2deg, #963488 -12.33%, #FFA366 40%, #FFB380 50.28%, #FFA366 60%, #FF4A59 114.17%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .btn-outline {
   @apply px-6 sm:px-8 py-3.5 font-medium text-base sm:text-lg text-white relative;
   background: transparent;
   border-radius: 91px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-outline::before {
@@ -79,6 +93,7 @@ h2 {
   border-radius: inherit;
   background: linear-gradient(106.2deg, #963488 -12.33%, #FC6F32 50.28%, #FF4A59 114.17%);
   z-index: -1;
+  transition: opacity 0.3s ease;
 }
 
 .btn-outline::after {
@@ -88,6 +103,11 @@ h2 {
   border-radius: inherit;
   background: black;
   z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.btn-outline:hover::after {
+  background: linear-gradient(106.2deg, #963488 -12.33%, #FC6F32 50.28%, #FF4A59 114.17%);
 }
 
 .stat-card {
