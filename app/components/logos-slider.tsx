@@ -33,7 +33,7 @@ const LogosSlider = () => {
   };
 
   return (
-    <div className="w-full max-w-[100vw] px-4 sm:px-8 md:px-20 py-10 flex flex-col items-center justify-center gap-10 overflow-hidden">
+    <div className="w-full max-w-[100vw] px-4 sm:px-8 md:px-20 py-10 flex flex-col items-center justify-center mt-20 gap-10 overflow-hidden">
       <motion.h3
         className="text-center text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-medium leading-none"
         initial="hidden"

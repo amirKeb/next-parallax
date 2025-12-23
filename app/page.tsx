@@ -31,6 +31,9 @@ export default function Home() {
   const HERO_TO_LOGOS_START = HOW_IT_WORKS_SCROLL_TOP;
   const HERO_TO_LOGOS_END = HOW_IT_WORKS_SCROLL_TOP + Math.round(vh * 0.9);
   const CROWDSOURCING_START = useMemo(() => Math.round(vh * 2.6), [vh]);
+  const CROWDSOURCING_END = useMemo(() => Math.round(vh * 3.5), [vh]);
+  const LEADERBOARD_START = useMemo(() => Math.round(vh * 3.5), [vh]);
+  const LEADERBOARD_END = useMemo(() => Math.round(vh * 4.5), [vh]);
   const VECTOR5_START_SCROLL = useMemo(() => Math.round(vh * 2.2), [vh]);
   const VECTOR5_FULL_SCROLL = useMemo(() => Math.round(vh * 3.0), [vh]);
   const PAGE_END_SCROLL = useMemo(() => Math.round(vh * 4.5), [vh]);
@@ -151,6 +154,18 @@ export default function Home() {
     scrollY,
     [COMMUNITY_START, COMMUNITY_START + vh * 0.8],
     [1, 0]
+  );
+
+  const crowdsourcingOpacity = useTransform(
+    scrollY,
+    [CROWDSOURCING_START - vh * 0.3, CROWDSOURCING_START, CROWDSOURCING_END, CROWDSOURCING_END + vh * 0.3],
+    [0, 1, 1, 0]
+  );
+
+  const leaderboardOpacity = useTransform(
+    scrollY,
+    [LEADERBOARD_START - vh * 0.3, LEADERBOARD_START, LEADERBOARD_END, LEADERBOARD_END + vh * 0.3],
+    [0, 1, 1, 0]
   );
 
   useMotionValueEvent(scrollY, "change", (v) => {
@@ -302,13 +317,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative min-h-screen flex items-center justify-center py-20">
+        <motion.section
+          className="relative min-h-screen flex items-center justify-center py-20"
+          style={{ opacity: crowdsourcingOpacity }}
+        >
           <CrowdsourcingSection />
-        </section>
+        </motion.section>
 
-        <section className="relative min-h-screen flex items-center justify-center py-20">
+        <motion.section
+          className="relative min-h-screen flex items-center justify-center py-20"
+          style={{ opacity: leaderboardOpacity }}
+        >
           <LeaderboardTable />
-        </section>
+        </motion.section>
 
         <motion.div
           className="fixed inset-0 z-[-5] pointer-events-none"
