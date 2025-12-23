@@ -212,7 +212,6 @@ export default function Home() {
             width={873}
             height={521}
             className="object-contain"
-            priority
           />
         </motion.div>
 
@@ -229,12 +228,11 @@ export default function Home() {
             width={1100}
             height={881}
             className="object-contain"
-            priority
           />
         </motion.div>
 
         <motion.div
-          className="hidden lg:block absolute right-18 bottom-16 w-[816px] h-[816px]"
+          className="hidden lg:block absolute right-8 xl:right-18 bottom-16 w-[500px] h-[500px] xl:w-[700px] xl:h-[700px] 2xl:w-[816px] 2xl:h-[816px]"
           style={{ y: planetLiftExtraY, opacity: planetFadeOut }}
         >
           <Image
@@ -242,12 +240,11 @@ export default function Home() {
             alt=""
             fill
             className="object-contain object-bottom"
-            priority
           />
         </motion.div>
       </motion.div>
 
-      <motion.nav className=" top-0 z-10 flex items-center justify-center gap-6 px-8 py-6 md:px-16">
+      <motion.nav className="relative top-0 z-10 flex items-center justify-center gap-6 px-8 py-6 md:px-16">
         <button
           type="button"
           className="btn-ghost"
@@ -255,7 +252,7 @@ export default function Home() {
         >
           How It Works
         </button>
-        <button className="btn-outline">Buy Salt AI</button>
+        <button type="button" className="btn-outline">Buy Salt AI</button>
       </motion.nav>
 
       <main>
@@ -293,13 +290,13 @@ export default function Home() {
                       decentralized LLMs to compete against OpenAI.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6">
-                      <button className="btn-outline">Buy Salt AI</button>
-                      <button className="btn-ghost">Try Now</button>
+                      <button type="button" className="btn-outline">Buy Salt AI</button>
+                      <button type="button" className="btn-ghost">Try Now</button>
                     </div>
                   </div>
 
                   <motion.div
-                    className="absolute left-0 right-0 top-full 2xl:mt-[152px] mt-[64px]"
+                    className="absolute left-0 right-0 top-full mt-[48px] sm:mt-[64px] md:mt-[80px] lg:mt-[120px] 2xl:mt-[152px]"
                     style={{ y: statsRevealY }}
                   >
                     <StatsContainer shouldExit={statsShouldExit} />
@@ -340,7 +337,6 @@ export default function Home() {
             alt=""
             fill
             className="object-cover object-top"
-            priority
           />
         </motion.div>
 

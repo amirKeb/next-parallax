@@ -1,12 +1,10 @@
-"use client";
-
 import Image from "next/image";
 
 export default function FooterSection() {
   return (
     <div className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden">
       <div className="flex-1 flex items-center justify-center px-4 sm:px-8 md:px-20 py-20">
-        <h4 className="text-[32px] leading-[32px] font-normal text-center tracking-[0%]">
+        <h4 className="text-xl sm:text-2xl md:text-[28px] lg:text-[32px] leading-tight lg:leading-[32px] font-normal text-center tracking-[0%]">
           Join our community and harvest $SALT
         </h4>
       </div>
@@ -25,19 +23,19 @@ export default function FooterSection() {
 
         <div className="border-t border-gray-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:opacity-80 transition-opacity">
+            <a href="#" aria-label="Join us on Telegram" className="hover:opacity-80 transition-opacity">
               <Image
                 src="/images/logos/telegram-logo.png"
-                alt="Telegram"
+                alt=""
                 width={32}
                 height={32}
                 className="w-8 h-8"
               />
             </a>
-            <a href="#" className="hover:opacity-80 transition-opacity">
+            <a href="#" aria-label="Follow us on X" className="hover:opacity-80 transition-opacity">
               <Image
                 src="/images/x-logo.png"
-                alt="X"
+                alt=""
                 width={32}
                 height={32}
                 className="w-8 h-8"
@@ -45,7 +43,7 @@ export default function FooterSection() {
             </a>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-gray-400">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6 text-xs sm:text-sm text-gray-400">
             <a href="#" className="hover:text-white transition-colors">
               Terms of Use
             </a>

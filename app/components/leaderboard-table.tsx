@@ -208,7 +208,7 @@ export default function LeaderboardTable() {
         <h2 className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-[64px] font-medium leading-none">
           LLM Leaderboard
         </h2>
-        <button className="btn-outline whitespace-nowrap">
+        <button type="button" className="btn-outline whitespace-nowrap">
           Submit your model
         </button>
       </motion.div>
@@ -244,22 +244,22 @@ export default function LeaderboardTable() {
               <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 Average
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden lg:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 ARC
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden lg:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 HellaSwag
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden md:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 MMLU
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden md:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 TruthfulQA
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden lg:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 Winogrande
               </th>
-              <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
+              <th className="hidden lg:table-cell text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
                 GSM8K
               </th>
               <th className="text-right py-4 px-3 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">
@@ -293,32 +293,32 @@ export default function LeaderboardTable() {
                     {formatNumber(row.average)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden lg:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.arc)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden lg:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.hellaswag)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden md:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.mmlu)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden md:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.truthfulqa)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden lg:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.winogrande)}
                   </span>
                 </td>
-                <td className="py-4 px-3 sm:px-4 text-right">
+                <td className="hidden lg:table-cell py-4 px-3 sm:px-4 text-right">
                   <span className="text-sm sm:text-base text-gray-300">
                     {formatNumber(row.gsm8k)}
                   </span>
@@ -341,7 +341,7 @@ export default function LeaderboardTable() {
           show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
         }}
       >
-        <button className="btn-ghost flex items-center gap-2 group">
+        <button type="button" className="btn-ghost flex items-center gap-2 group">
           View full leaderboard
           <svg
             width="16"

@@ -12,7 +12,7 @@ export default function CommunitySection({ moonY, moonOpacity }: CommunitySectio
     return (
         <div className="relative w-full min-h-screen flex items-center overflow-hidden">
             <motion.div
-                className="absolute top-18 right-0 w-[200px] h-[200px] lg:w-[400px] lg:h-[400px]"
+                className="absolute top-16 sm:top-20 right-0 w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] md:w-[280px] md:h-[280px] lg:w-[400px] lg:h-[400px]"
                 style={{ y: moonY, opacity: moonOpacity }}
             >
                 <Image
@@ -20,7 +20,6 @@ export default function CommunitySection({ moonY, moonOpacity }: CommunitySectio
                     alt=""
                     fill
                     className="object-contain"
-                    priority
                 />
             </motion.div>
 
@@ -30,7 +29,7 @@ export default function CommunitySection({ moonY, moonOpacity }: CommunitySectio
                 </h2>
 
                 <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-3xl text-left">
-                    Join us on our mission to to the moon & revolutionize open source AI development
+                    Join us on our mission to the moon & revolutionize open source AI development
                     so that we can build a permissionless, democratized, and decentralized AI.
                 </p>
 
@@ -39,19 +38,19 @@ export default function CommunitySection({ moonY, moonOpacity }: CommunitySectio
                 </p>
 
                 <div className="flex items-center gap-6 mt-4">
-                    <a href="#" className="hover:opacity-80 transition-opacity">
+                    <a href="#" aria-label="Join us on Telegram" className="hover:opacity-80 transition-opacity">
                         <Image
                             src="/images/logos/telegram-logo.png"
-                            alt="Telegram"
+                            alt=""
                             width={40}
                             height={40}
                             className="w-8 h-8 sm:w-10 sm:h-10"
                         />
                     </a>
-                    <a href="#" className="hover:opacity-80 transition-opacity">
+                    <a href="#" aria-label="Follow us on X" className="hover:opacity-80 transition-opacity">
                         <Image
                             src="/images/x-logo.png"
-                            alt="X"
+                            alt=""
                             width={40}
                             height={40}
                             className="w-8 h-8 sm:w-10 sm:h-10"

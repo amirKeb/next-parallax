@@ -59,6 +59,7 @@ export default function CrowdsourcingSection() {
       </motion.p>
 
       <motion.button
+        type="button"
         className="btn-outline mt-2"
         variants={{
           hidden: { opacity: 0, y: 50 },

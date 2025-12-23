@@ -22,9 +22,10 @@ const LogosSlider = () => {
 
   const handleViewportEnter = () => {
     controls.start("show");
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setShouldSlide(true);
     }, 800);
+    return () => clearTimeout(timer);
   };
 
   const handleViewportLeave = () => {
