@@ -12,9 +12,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import StatsContainer from "./components/stats-container";
 import LogosSlider from "./components/logos-slider";
+import CrowdsourcingSection from "./components/crowdsourcing-section";
+import LeaderboardTable from "./components/leaderboard-table";
 
 export default function Home() {
-  // Viewport-height derived scroll "milestones" so timings stay consistent on mobile.
   const [vh, setVh] = useState(800);
   useEffect(() => {
     const update = () => setVh(window.innerHeight || 800);
@@ -27,6 +28,10 @@ export default function Home() {
   const STATS_EXIT_SCROLL_TOP = useMemo(() => Math.round(vh * 2.0), [vh]);
   const HERO_TO_LOGOS_START = HOW_IT_WORKS_SCROLL_TOP;
   const HERO_TO_LOGOS_END = HOW_IT_WORKS_SCROLL_TOP + Math.round(vh * 0.9);
+  const CROWDSOURCING_START = useMemo(() => Math.round(vh * 2.6), [vh]);
+  const VECTOR5_START_SCROLL = useMemo(() => Math.round(vh * 2.2), [vh]);
+  const VECTOR5_FULL_SCROLL = useMemo(() => Math.round(vh * 3.0), [vh]);
+  const PAGE_END_SCROLL = useMemo(() => Math.round(vh * 4.5), [vh]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ container: containerRef });
@@ -43,6 +48,11 @@ export default function Home() {
     [0, HOW_IT_WORKS_SCROLL_TOP],
     [0, -80]
   );
+  const blueBlurY = useTransform(
+    scrollY,
+    [0, vh * 0.65, HOW_IT_WORKS_SCROLL_TOP, HERO_TO_LOGOS_END, CROWDSOURCING_START],
+    [0, 0, -72, -72, -vh * 1.6]
+  );
   const statsRevealY = useTransform(
     scrollY,
     [0, HOW_IT_WORKS_SCROLL_TOP],
@@ -50,8 +60,8 @@ export default function Home() {
   );
   const planetLiftExtraY = useTransform(
     scrollY,
-    [0, vh * 0.65, HOW_IT_WORKS_SCROLL_TOP, STATS_EXIT_SCROLL_TOP],
-    [0, 0, -72, -160]
+    [0, vh * 0.65, HOW_IT_WORKS_SCROLL_TOP, STATS_EXIT_SCROLL_TOP, PAGE_END_SCROLL],
+    [0, 0, -72, -160, -vh * 0.6]
   );
   const heroGradientTwoOpacity = useTransform(
     scrollY,
@@ -97,6 +107,24 @@ export default function Home() {
     [0, 1]
   );
 
+  const redBlurOpacity = useTransform(
+    scrollY,
+    [STATS_EXIT_SCROLL_TOP, VECTOR5_START_SCROLL],
+    [0.6, 0]
+  );
+
+  const vector5Opacity = useTransform(
+    scrollY,
+    [STATS_EXIT_SCROLL_TOP, VECTOR5_START_SCROLL],
+    [0, 0.9]
+  );
+
+  const vector5Y = useTransform(
+    scrollY,
+    [STATS_EXIT_SCROLL_TOP, VECTOR5_FULL_SCROLL],
+    [0, -vh * 0.1]
+  );
+
   useMotionValueEvent(scrollY, "change", (v) => {
     const next = v >= STATS_EXIT_SCROLL_TOP;
     setStatsShouldExit((prev) => (prev === next ? prev : next));
@@ -118,7 +146,10 @@ export default function Home() {
         className="fixed inset-0 -z-10"
         style={{ y: backgroundLiftY }}
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[40vh] flex items-start justify-center">
+        <motion.div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[40vh] flex items-start justify-center"
+          style={{ y: blueBlurY }}
+        >
           <Image
             src="/images/blue-blur.svg"
             alt=""
@@ -127,17 +158,37 @@ export default function Home() {
             className="object-contain"
             priority
           />
-        </div>
-        <div className="absolute -bottom-20 translate-y-20 left-0 w-full h-[30vh] flex items-end justify-start">
+        </motion.div>
+        <motion.div
+          className="absolute -bottom-20 translate-y-20 left-0 w-full h-[30vh] flex items-end justify-start"
+          style={{ opacity: redBlurOpacity }}
+        >
           <Image
             src="/images/red-blur.svg"
             alt=""
             width={873}
             height={521}
-            className="object-contain opacity-60"
+            className="object-contain"
             priority
           />
-        </div>
+        </motion.div>
+
+        <motion.div
+          className="fixed -bottom-16 translate-y-16 left-0 w-full h-[55vh] flex items-end justify-start -z-10 pointer-events-none"
+          style={{
+            opacity: vector5Opacity,
+            y: vector5Y,
+          }}
+        >
+          <Image
+            src="/images/Vector 5.svg"
+            alt=""
+            width={1100}
+            height={881}
+            className="object-contain"
+            priority
+          />
+        </motion.div>
 
         <motion.div
           className="hidden lg:block absolute right-18 bottom-16 w-[816px] h-[816px]"
@@ -175,7 +226,6 @@ export default function Home() {
                 <motion.div className="relative" style={{ y: heroLiftY }}>
                   <div className="flex-1 max-w-[85vw] lg:gap-9 gap-4 flex flex-col">
                     <div className="relative">
-                      {/* Semantic h1 keeps layout; visible layers are aria-hidden */}
                       <h1 className="invisible">
                         A new economic primitive for funding decentralized AI
                       </h1>
@@ -222,6 +272,14 @@ export default function Home() {
               </motion.div>
             </div>
           </div>
+        </section>
+
+        <section className="relative min-h-screen flex items-center justify-center py-20">
+          <CrowdsourcingSection />
+        </section>
+
+        <section className="relative min-h-screen flex items-center justify-center py-20">
+          <LeaderboardTable />
         </section>
       </main>
     </div>
