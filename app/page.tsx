@@ -14,6 +14,8 @@ import StatsContainer from "./components/stats-container";
 import LogosSlider from "./components/logos-slider";
 import CrowdsourcingSection from "./components/crowdsourcing-section";
 import LeaderboardTable from "./components/leaderboard-table";
+import CommunitySection from "./components/community-section";
+import FooterSection from "./components/footer-section";
 
 export default function Home() {
   const [vh, setVh] = useState(800);
@@ -32,6 +34,8 @@ export default function Home() {
   const VECTOR5_START_SCROLL = useMemo(() => Math.round(vh * 2.2), [vh]);
   const VECTOR5_FULL_SCROLL = useMemo(() => Math.round(vh * 3.0), [vh]);
   const PAGE_END_SCROLL = useMemo(() => Math.round(vh * 4.5), [vh]);
+  const COMMUNITY_START = useMemo(() => Math.round(vh * 5.0), [vh]);
+  const FOOTER_START = useMemo(() => Math.round(vh * 6.0), [vh]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ container: containerRef });
@@ -115,14 +119,38 @@ export default function Home() {
 
   const vector5Opacity = useTransform(
     scrollY,
-    [STATS_EXIT_SCROLL_TOP, VECTOR5_START_SCROLL],
-    [0, 0.9]
+    [STATS_EXIT_SCROLL_TOP, VECTOR5_START_SCROLL, PAGE_END_SCROLL, COMMUNITY_START],
+    [0, 0.9, 0.9, 0]
   );
 
   const vector5Y = useTransform(
     scrollY,
     [STATS_EXIT_SCROLL_TOP, VECTOR5_FULL_SCROLL],
     [0, -vh * 0.1]
+  );
+
+  const planetFadeOut = useTransform(
+    scrollY,
+    [PAGE_END_SCROLL, COMMUNITY_START],
+    [1, 0]
+  );
+
+  const earthY = useTransform(
+    scrollY,
+    [PAGE_END_SCROLL, COMMUNITY_START, FOOTER_START],
+    [vh * 1.2, vh * 1, vh * 0.6]
+  );
+
+  const moonY = useTransform(
+    scrollY,
+    [COMMUNITY_START, FOOTER_START],
+    [0, -vh * -0.4]
+  );
+
+  const moonOpacity = useTransform(
+    scrollY,
+    [COMMUNITY_START, COMMUNITY_START + vh * 0.8],
+    [1, 0]
   );
 
   useMotionValueEvent(scrollY, "change", (v) => {
@@ -192,7 +220,7 @@ export default function Home() {
 
         <motion.div
           className="hidden lg:block absolute right-18 bottom-16 w-[816px] h-[816px]"
-          style={{ y: planetLiftExtraY }}
+          style={{ y: planetLiftExtraY, opacity: planetFadeOut }}
         >
           <Image
             src="/images/planet.png"
@@ -280,6 +308,27 @@ export default function Home() {
 
         <section className="relative min-h-screen flex items-center justify-center py-20">
           <LeaderboardTable />
+        </section>
+
+        <motion.div
+          className="fixed inset-0 z-[-5] pointer-events-none"
+          style={{ y: earthY }}
+        >
+          <Image
+            src="/images/earth.png"
+            alt=""
+            fill
+            className="object-cover object-top"
+            priority
+          />
+        </motion.div>
+
+        <section className="relative min-h-screen flex items-center">
+          <CommunitySection moonY={moonY} moonOpacity={moonOpacity} />
+        </section>
+
+        <section className="relative min-h-screen flex flex-col">
+          <FooterSection />
         </section>
       </main>
     </div>
